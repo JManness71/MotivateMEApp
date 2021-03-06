@@ -50,4 +50,19 @@ public class SecondFragment extends Fragment {
         rolledValue = rand.nextInt(1001);
         return rolledValue;
     }
+
+//    private void CalculateReward(int rollVal){
+//        if(rollVal > ){
+//
+//        }
+//        if(rollVal > ){
+//
+//        }
+//        if(rollVal > ){
+//
+//        }
+//        if(rollVal > ){
+//
+//        }
+//    }
 }

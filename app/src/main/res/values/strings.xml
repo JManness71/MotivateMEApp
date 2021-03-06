@@ -20,6 +20,11 @@
     <string name="roll_text"></string>
 
     <string name="activities_button_home">Home</string>
+    <string-array name="Testing">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
 
     <string name="rewards_button_home">Home</string>
 
