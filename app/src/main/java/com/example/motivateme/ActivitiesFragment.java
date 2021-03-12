@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,7 +75,7 @@ public class ActivitiesFragment extends Fragment {
         recyclerView = view.findViewById(R.id.activitiesRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(new ActivitiesAdapter());
+        recyclerView.setAdapter(new RewardsAdapter());
         return view;
     }
 

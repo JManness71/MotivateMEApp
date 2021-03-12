@@ -69,7 +69,7 @@ public class RewardsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rewardsRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(new ActivitiesAdapter());
+        recyclerView.setAdapter(new RewardsAdapter());
         return view;
     }
 

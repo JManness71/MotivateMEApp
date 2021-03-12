@@ -1,5 +1,6 @@
 package com.example.motivateme;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -15,12 +16,18 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static SharedPreferences preferences;
+    public static SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        preferences = getSharedPreferences(getPackageName() + "_preferences", MODE_PRIVATE);
+        editor = preferences.edit();
 
 //        FloatingActionButton fab = findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {

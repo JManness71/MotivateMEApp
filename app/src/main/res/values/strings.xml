@@ -27,5 +27,6 @@
     </string-array>
 
     <string name="rewards_button_home">Home</string>
+    <string name="rewards_button_add">Add</string>
 
 </resources>
