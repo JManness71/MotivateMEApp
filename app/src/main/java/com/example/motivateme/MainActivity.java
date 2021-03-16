@@ -16,8 +16,9 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static SharedPreferences preferences;
-    public static SharedPreferences.Editor editor;
+    public static SharedPreferences rewardsPreferences;
+    public static SharedPreferences percentagesPreferences;
+    public static SharedPreferences activityPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +27,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        preferences = getSharedPreferences(getPackageName() + "_preferences", MODE_PRIVATE);
-        editor = preferences.edit();
+        rewardsPreferences = getSharedPreferences(getPackageName() + "reward_preferences", MODE_PRIVATE);
+        percentagesPreferences = getSharedPreferences(getPackageName() + "percent_preferences", MODE_PRIVATE);
+        activityPreferences = getSharedPreferences(getPackageName() + "activity_preferences", MODE_PRIVATE);
 
 //        FloatingActionButton fab = findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {

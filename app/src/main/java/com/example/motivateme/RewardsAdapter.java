@@ -1,8 +1,11 @@
 package com.example.motivateme;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,14 +17,19 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import android.content.SharedPreferences;
 
+import java.util.ArrayList;
+
 public class RewardsAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
-    String[] test = {"Entry 1", "Entry 2", "Entry 3", "Entry 4", "Entry 5"};
-    public String[] percentages = new String[test.length];
-    EditText ed1;
+    private ArrayList<String> rewards = new ArrayList<String>();
+    private ArrayList<String> percentages = new ArrayList<String>();
+    private SharedPreferences savedRewards = MainActivity.rewardsPreferences;
+    private SharedPreferences savedPercentages = MainActivity.percentagesPreferences;
+    private int position;
 
     public RewardsAdapter() {
-        for(int i = 0; i < test.length; i++){
-            percentages[i] = getSavedActivityData(test[i] + "_rewards");
+        for(int i = 0; i < PreferenceHelper.numPreferences(savedPercentages); i++){
+            percentages.add(PreferenceHelper.getValue(savedPercentages, "Percentages_" + Integer.toString(i)));
+            rewards.add(PreferenceHelper.getValue(savedRewards, "Rewards_" + Integer.toString(i)));
         }
     }
 
@@ -40,8 +48,15 @@ public class RewardsAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
-        holder.getView().setText(test[position]);
-        holder.getNumber().setText(percentages[position]);
+        holder.getView().setText(rewards.get(position));
+        holder.getNumber().setText(percentages.get(position));
+        holder.getCard().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                setPosition(holder.getLayoutPosition());
+                return false;
+            }
+        });
         holder.getNumber().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -50,8 +65,8 @@ public class RewardsAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                percentages[position] = s.toString();
-                setSavedActivityData(test[position] + "_rewards", s.toString());
+                percentages.set(position, s.toString());
+                PreferenceHelper.setValue(savedPercentages, "Percentages_" + Integer.toString(position), s.toString());
             }
 
             @Override
@@ -63,15 +78,38 @@ public class RewardsAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
     @Override
     public int getItemCount() {
-        return test.length;
+        return rewards.size();
     }
 
-    private String getSavedActivityData(String key){
-        return PreferenceHelper.getValue(key);
+    public void updateLists(){
+        clearLists();
+        for(int i = 0; i < PreferenceHelper.numPreferences(savedPercentages); i++){
+            percentages.add(PreferenceHelper.getValue(savedPercentages, "Percentages_" + Integer.toString(i)));
+            rewards.add(PreferenceHelper.getValue(savedRewards, "Rewards_" + Integer.toString(i)));
+        }
     }
 
-    private void setSavedActivityData(String key, String value){
-        PreferenceHelper.setValue(key, value);
+    public void clearLists(){
+        percentages.clear();
+        rewards.clear();
     }
 
+    public int getPosition(){
+        return position;
+    }
+
+    public void setPosition(int p){
+        this.position = p;
+    }
+
+    public void reloadPreferences(){
+        int i = position;
+        while(PreferenceHelper.isEntry(savedRewards, "Rewards_" + Integer.toString(i + 1))){
+            PreferenceHelper.setValue(savedRewards, "Rewards_" + Integer.toString(i), PreferenceHelper.getValue(savedRewards, "Rewards_" + Integer.toString(i + 1)));
+            PreferenceHelper.setValue(savedPercentages, "Percentages_" + Integer.toString(i), PreferenceHelper.getValue(savedPercentages, "Percentages_" + Integer.toString(i + 1)));
+            i++;
+        }
+        PreferenceHelper.removeItem(savedRewards, "Rewards_" + Integer.toString(i));
+        PreferenceHelper.removeItem(savedPercentages, "Percentages_" + Integer.toString(i));
+    }
 }

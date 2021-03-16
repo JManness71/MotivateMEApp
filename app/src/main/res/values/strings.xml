@@ -28,5 +28,11 @@
 
     <string name="rewards_button_home">Home</string>
     <string name="rewards_button_add">Add</string>
+    <string name="rewards_button_clear">Clear</string>
+    <string name="rewards_title_rewards">Rewards:</string>
+    <string name="rewards_title_percent">% chance:</string>
+
+    <string name="activities_button_add">Add</string>
+    <string name="activities_button_clear">Clear</string>
 
 </resources>

@@ -1,7 +1,6 @@
 package com.example.motivateme;
 
 import android.view.ContextMenu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -10,26 +9,19 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
-
+public class ActivitiesRecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
     private TextView view;
-    private EditText number;
     private CardView card;
 
-    public RecyclerViewHolder(@NonNull View itemView) {
+    public ActivitiesRecyclerViewHolder(@NonNull View itemView) {
         super(itemView);
-        view = itemView.findViewById(R.id.randomText);
-        number = itemView.findViewById(R.id.editTextNumber2);
-        card = itemView.findViewById(R.id.cv);
+        view = itemView.findViewById(R.id.ActivityText);
+        card = itemView.findViewById(R.id.cv2);
         itemView.setOnCreateContextMenuListener(this);
     }
 
     public TextView getView(){
         return view;
-    }
-
-    public EditText getNumber(){
-        return number;
     }
 
     public CardView getCard(){
@@ -41,6 +33,4 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.
         menu.add(0, v.getId(), 0, "Edit");
         menu.add(0, v.getId(), 0, "Delete");
     }
-
-
 }
