@@ -13,7 +13,9 @@ import java.util.ArrayList;
 public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesRecyclerViewHolder> {
     private ArrayList<String> activities = new ArrayList<String>();
     private SharedPreferences savedActivities = MainActivity.activityPreferences;
+    private SharedPreferences savedNumRewards = MainActivity.numRewardsPreferences;
     private int position;
+    private int numRewards;
 
     public ActivitiesAdapter(){
         for(int i = 0; i < PreferenceHelper.numPreferences(savedActivities); i++){
@@ -41,6 +43,24 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesRecyclerVi
             public boolean onLongClick(View v) {
                 setPosition(holder.getLayoutPosition());
                 return false;
+            }
+        });
+        holder.getCheck().setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                boolean checked = holder.getCheck().isChecked();
+                if(checked == true){
+                    holder.getCheck().setChecked(true);
+                    numRewards++;
+                    PreferenceHelper.setValue(savedNumRewards, "numRewards", Integer.toString(numRewards));
+                }
+                else{
+                    holder.getCheck().setChecked(false);
+                    if(numRewards > 0){
+                        numRewards--;
+                        PreferenceHelper.setValue(savedNumRewards, "numRewards", Integer.toString(numRewards));
+                    }
+                }
             }
         });
     }

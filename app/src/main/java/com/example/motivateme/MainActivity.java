@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     public static SharedPreferences rewardsPreferences;
     public static SharedPreferences percentagesPreferences;
     public static SharedPreferences activityPreferences;
+    public static SharedPreferences numRewardsPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         rewardsPreferences = getSharedPreferences(getPackageName() + "reward_preferences", MODE_PRIVATE);
         percentagesPreferences = getSharedPreferences(getPackageName() + "percent_preferences", MODE_PRIVATE);
         activityPreferences = getSharedPreferences(getPackageName() + "activity_preferences", MODE_PRIVATE);
+        numRewardsPreferences = getSharedPreferences(getPackageName() + "num_reward_preferences", MODE_PRIVATE);
 
 //        FloatingActionButton fab = findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
