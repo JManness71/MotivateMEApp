@@ -4,7 +4,7 @@ import android.content.SharedPreferences;
 
 public class PreferenceHelper {
     public static String getValue(SharedPreferences p, String key){
-        return p.getString(key, "");
+        return p.getString(key, "0");
     }
 
     public static void setValue(SharedPreferences p, String key, String value){

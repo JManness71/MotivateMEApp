@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,8 @@ public class RewardsAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     private SharedPreferences savedRewards = MainActivity.rewardsPreferences;
     private SharedPreferences savedPercentages = MainActivity.percentagesPreferences;
     private int position;
+    private int sumPercent = 0;
+    private Context context;
 
     public RewardsAdapter() {
         for(int i = 0; i < PreferenceHelper.numPreferences(savedPercentages); i++){
@@ -43,6 +46,7 @@ public class RewardsAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
+        context = parent.getContext();
         return new RecyclerViewHolder(view);
     }
 
@@ -111,5 +115,14 @@ public class RewardsAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
         }
         PreferenceHelper.removeItem(savedRewards, "Rewards_" + Integer.toString(i));
         PreferenceHelper.removeItem(savedPercentages, "Percentages_" + Integer.toString(i));
+    }
+
+    private int TryParse(String s){
+        try{
+            return Integer.parseInt(s);
+        }
+        catch(NumberFormatException e){
+            return 0;
+        }
     }
 }

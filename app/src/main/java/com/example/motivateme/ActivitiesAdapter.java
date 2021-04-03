@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import static java.lang.Integer.parseInt;
+
 public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesRecyclerViewHolder> {
     private ArrayList<String> activities = new ArrayList<String>();
     private SharedPreferences savedActivities = MainActivity.activityPreferences;
@@ -21,6 +23,7 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesRecyclerVi
         for(int i = 0; i < PreferenceHelper.numPreferences(savedActivities); i++){
             activities.add(PreferenceHelper.getValue(savedActivities, "Activities_" + Integer.toString(i)));
         }
+        numRewards = parseInt(PreferenceHelper.getValue(savedNumRewards, "numRewards"));
     }
 
     @Override

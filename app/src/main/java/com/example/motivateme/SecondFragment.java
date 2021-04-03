@@ -36,6 +36,9 @@ public class SecondFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        TextView rew = (TextView)getView().findViewById(R.id.textView4);
+        rew.setText("Rewards remaining: " + PreferenceHelper.getValue(savedNumRewards, "numRewards"));
+
         view.findViewById(R.id.button_second).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,12 +69,9 @@ public class SecondFragment extends Fragment {
                 }
 
                 TextView rew = (TextView)getView().findViewById(R.id.textView4);
-                rew.setText(PreferenceHelper.getValue(savedNumRewards, "numRewards"));
+                rew.setText("Rewards remaining: " + PreferenceHelper.getValue(savedNumRewards, "numRewards"));
             }
         });
-
-        TextView rew = (TextView)getView().findViewById(R.id.textView4);
-        rew.setText(PreferenceHelper.getValue(savedNumRewards, "numRewards"));
     }
 
     private int Roll() {
@@ -82,8 +82,12 @@ public class SecondFragment extends Fragment {
     }
 
     private String CalculateReward(int rollVal){
+        int sum = 0;
+        for(int j = 0; j < chances.size(); j++){
+            sum += chances.get(j);
+        }
         for(int i = 0; i < chances.size(); i++){
-            int numToCheck = 100 - chances.get(i);
+            int numToCheck = sum - chances.get(i);
             if(rollVal > numToCheck){
                 return rewards.get(i);
             }

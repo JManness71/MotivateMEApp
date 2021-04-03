@@ -179,5 +179,4 @@ public class RewardsFragment extends Fragment {
         }
         return false;
     }
-
 }
