@@ -3,6 +3,8 @@ package com.example.motivateme;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.ContextMenu;
@@ -19,6 +21,7 @@ import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.logging.LogRecord;
 
 public class RewardsAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     private ArrayList<String> rewards = new ArrayList<String>();
@@ -120,6 +123,17 @@ public class RewardsAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     private int TryParse(String s){
         try{
             return Integer.parseInt(s);
+        }
+        catch(NumberFormatException e){
+            return 0;
+        }
+    }
+
+    private int GetNumFromString(String s){
+        int returnedVal;
+        try{
+            returnedVal = Integer.parseInt(s);
+            return returnedVal;
         }
         catch(NumberFormatException e){
             return 0;

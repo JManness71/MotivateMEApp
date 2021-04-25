@@ -34,7 +34,7 @@
 
     <string name="activities_button_add">Add</string>
     <string name="activities_button_clear">Clear</string>
-    <string name="activities_check">Completed</string>
+    <string name="activities_check">Done</string>
 
     <string name="home_button_info">Info</string>
     <string name="info_button_home">Home</string>
